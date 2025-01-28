@@ -1,0 +1,6 @@
+duckdb
+sqlparse
+numpy
+pandas
+tabulate
+together
