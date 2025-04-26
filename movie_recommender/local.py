@@ -12,7 +12,7 @@ embeddings = generate_embeddings(to_embed)
 # to save embeddings in local file 
 # save_embeddings(embeddings)
 
-query = "super hero action movie with a timeline twist"
+query = "list the 10 movies"
 top_movies = find_similar_movies(query, to_embed, movies_data)
 titles, overviews = zip(*top_movies)
 story = generate_story(titles, overviews)

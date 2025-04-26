@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+openai
+sqlalchemy
+pandas
+tabulate
+sqlparse
+loguru
+psycopg2-binary
+python-dotenv
+python-multipart
+psycopg2
+streamlit
+pytest              
+pytest-mock         
+streamlit-testing
+pytest-asyncio

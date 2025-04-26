@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # FastAPI URL (assuming FastAPI app is running locally on port 8000)
-fastapi_url = "http://127.0.0.1:8006/generate_story"
+fastapi_url = "http://127.0.0.1:8000/generate_story"
 
 def get_story_from_fastapi(query: str):
     response = requests.get(fastapi_url, params={"query": query})
