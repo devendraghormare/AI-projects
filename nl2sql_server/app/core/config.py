@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     OPENAI_API_KEY: str
 
-    # Annotate 'config' as a ClassVar to avoid errors
-    config: ClassVar[ConfigDict] = ConfigDict(env_file=".env")
+    # Correct attribute name is 'model_config', not 'config'
+    model_config: ClassVar[ConfigDict] = ConfigDict(env_file=".env")
 
 settings = Settings()

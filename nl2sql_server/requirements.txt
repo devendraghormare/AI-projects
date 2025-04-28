@@ -13,5 +13,4 @@ psycopg2
 streamlit
 pytest              
 pytest-mock         
-streamlit-testing
 pytest-asyncio
