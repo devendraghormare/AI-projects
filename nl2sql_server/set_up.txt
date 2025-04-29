@@ -1,0 +1,12 @@
+source venv/bin/activate
+cd app/
+uvicorn main:app --reload
+
+
+source venv/bin/activate
+cd frontend/
+streamlit run streamlit_app.py 
+
+
+
+psql -h localhost -U postgres -d ecommerce 

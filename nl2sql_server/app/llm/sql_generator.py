@@ -1,19 +1,36 @@
 import openai
+from loguru import logger
+from prompt_examples import FEW_SHOT_SQL_EXAMPLES
 
-# Async function to generate SQL
+
+llm_logger = logger.bind(llm=True)
+
 async def generate_sql(question: str, schema: str, api_key: str) -> str:
-    prompt = f"""Given the following database schema:
+    prompt = f"""
+        Given the following database schema:
 
-{schema}
+        {schema}
 
-Write a SQL query to answer the following question: "{question}". 
-Return only the SQL code without any explanation or extra text.
-"""
+        You must generate only the SQL query based on the schema and question.
+        Follow these strict rules:
+        - No comments, explanations, or extra formatting.
+        - SQL must be valid PostgreSQL.
+        - Use table and column names exactly as given.
+        - Fully qualify ambiguous columns if needed.
+        - WHERE, JOIN, GROUP BY, and ORDER BY clauses must be explicit if needed.
+        - Do not use aliases in WHERE or HAVING clauses.
+        - Always complete the query even if conditions are complex.
+        - Output must start and end with SQL only.
+
+        Here are examples of incorrect vs correct SQL (for learning):
+
+        {FEW_SHOT_SQL_EXAMPLES}
+
+        Question: "{question}"
+    """
 
     try:
-        # Create OpenAI Async client dynamically with passed api_key
         client = openai.AsyncOpenAI(api_key=api_key)
-
         response = await client.chat.completions.create(
             model="gpt-4",
             messages=[
@@ -21,15 +38,14 @@ Return only the SQL code without any explanation or extra text.
                 {"role": "user", "content": prompt},
             ],
             temperature=0,
-            max_tokens=150,
+            max_tokens=250,
+            timeout=30.0
         )
-
-        sql_query = response.choices[0].message.content.strip()
-        return sql_query
+        return response.choices[0].message.content.strip()
 
     except openai.APIError as e:
-        print(f"OpenAI API error: {e}")
-        return "Error: Unable to generate SQL query due to an API issue."
+        llm_logger.error(f"OpenAI API error: {e} | Prompt: {question}")
+        return {"status": "error", "message": "OpenAI API error"}
     except Exception as e:
-        print(f"Error during query generation: {e}")
-        return f"Error: {str(e)}"
+        llm_logger.error(f"Unexpected error: {e} | Prompt: {question}")
+        return {"status": "error", "message": str(e)}
