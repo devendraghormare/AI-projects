@@ -115,9 +115,13 @@ def generate_fake_data(num_records):
 
         # Insert fake products
         logging.info(f"Inserting {num_records} fake products...")
+        real_product_names = [
+            "Wireless Mouse", "Bluetooth Headphones", "Gaming Keyboard", "Smartphone", "4K TV",
+            "Laptop", "Smartwatch", "Coffee Maker", "Electric Kettle", "Gaming Chair", "Air Conditioner"
+        ]
         products_data = [
-            (random.choice(category_ids), fake.word().capitalize(), fake.text(max_nb_chars=200),
-             round(random.uniform(10.0, 500.0), 2), random.randint(1, 100)) for _ in range(num_records)
+            (random.choice(category_ids), random.choice(real_product_names), fake.text(max_nb_chars=200),
+            round(random.uniform(10.0, 500.0), 2), random.randint(1, 100)) for _ in range(num_records)
         ]
         execute_batch(
             cursor,

@@ -10,3 +10,5 @@ streamlit run streamlit_app.py
 
 
 psql -h localhost -U postgres -d ecommerce 
+
+password
