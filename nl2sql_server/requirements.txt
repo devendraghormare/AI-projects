@@ -16,3 +16,4 @@ pytest-mock
 pytest-asyncio
 pydantic-settings
 faker
+tiktoken

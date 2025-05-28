@@ -28,13 +28,21 @@ async def generate_and_execute_query(request: QueryRequest):
             optimized_question = optimize_question(request.question)
             logger.info(f"Optimized question: {optimized_question}")
 
-            # Generate SQL query from LLM
+            # Generate SQL query from LLM and get token usage
             logger.info(f"Generating SQL for question: {optimized_question}")
-            sql_query = await generate_sql(optimized_question, schema_info, settings.OPENAI_API_KEY)
+            llm_result = await generate_sql(
+                optimized_question,
+                schema_info,
+                settings.OPENAI_API_KEY,
+                return_usage=True
+            )
+            sql_query = llm_result["sql"]
+            token_usage = llm_result.get("token_usage", {})
 
-            # Clean up the SQL query (remove markdown)
+            # Clean up the SQL query (remove markdown if any)
             sql_query = sql_query.replace('```sql', '').replace('```', '').strip()
             logger.info(f"Generated SQL: {sql_query}")
+            logger.info(f"Token usage: {token_usage}")
 
             # Validate SQL query
             logger.info("Validating the SQL query.")
@@ -50,12 +58,13 @@ async def generate_and_execute_query(request: QueryRequest):
 
             # Format and return results
             formatted_results = format_results(rows, columns)
-            logger.info(f"Formatted the results.")
+            logger.info("Formatted the results.")
 
             return QueryResponse(
                 sql_query=sql_query,
                 table=formatted_results["table"],
-                results=formatted_results["json"]
+                results=formatted_results["json"],
+                token_usage=token_usage  # Include this in response
             )
 
     except Exception as e:

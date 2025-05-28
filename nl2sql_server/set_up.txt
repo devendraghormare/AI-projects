@@ -12,3 +12,12 @@ streamlit run streamlit_app.py
 psql -h localhost -U postgres -d ecommerce 
 
 password
+
+
+
+########################## for run test cases ##################################
+
+first setup environment 
+ -- $env:PYTHONPATH = "E:\workspace\AI-projects\AI-projects\nl2sql_server\app"
+then run 
+ -- pytest .\tests\

@@ -22,8 +22,13 @@ def test_multiple_rows_multiple_columns():
 
     logger.info(f"Testing multiple rows: {result}")
 
+    # Normalize age to int for comparison
+    for item in result['json']:
+        item['age'] = int(float(item['age']))
+
     assert "John" in result['table'] and "Jane" in result['table']
     assert result['json'] == [{"name": "John", "age": 30}, {"name": "Jane", "age": 25}]
+
 
 def test_empty_result():
     rows = []

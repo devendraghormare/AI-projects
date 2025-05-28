@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Any
+from typing import List, Any, Optional, Dict 
 
 class QueryRequest(BaseModel):
     question: str
@@ -8,4 +8,5 @@ class QueryRequest(BaseModel):
 class QueryResponse(BaseModel):
     sql_query: str
     table: str
-    results: List[Any]   
+    results: List[Any]
+    token_usage: Optional[Dict[str, int]] = None 

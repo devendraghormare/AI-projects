@@ -145,6 +145,17 @@ with st.spinner("Generating SQL query and fetching results..."):
                         st.code(sql_query, language="sql")
                     else:
                         st.error("No SQL query generated.")
+                    
+                    # Display token usage if available
+                    token_usage = data.get("token_usage", {})
+                    if token_usage:
+                        st.markdown("#### 🧾 Token Usage:")
+                        st.markdown(f"""
+                        - Prompt Tokens: **{token_usage.get('prompt_tokens', 0)}**  
+                        - Completion Tokens: **{token_usage.get('completion_tokens', 0)}**  
+                        - Total Tokens: **{token_usage.get('total_tokens', 0)}**
+                        """)
+
 
                     # Display the results in a data frame format
                     st.write(f"### 📊 Query Results:")
