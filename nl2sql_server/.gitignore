@@ -53,3 +53,6 @@ frontend/dist/
 *.swo
 *.sublime-project
 *.sublime-workspace
+
+.nl2sql_cache/
+logs/
