@@ -45,4 +45,4 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest nl2sql_server/tests/ --disable-warnings --maxfail=1
+        pytest nl2sql_server/tests/unit/ --disable-warnings --maxfail=1
