@@ -25,6 +25,9 @@ def test_query_success(mocker):
     response = client.post("/v1/query", json={"question": "List users", "allow_modifications": False})
     assert response.status_code == 200
     data = response.json()
+    print(response.status_code)
+    print(response.json())
+
     assert "SELECT * FROM users" in data['sql_query']
     assert len(data['results']) > 0
 
@@ -46,6 +49,9 @@ def test_query_sql_invalid(mocker):
 
     response = client.post("/v1/query", json={"question": "delete everything", "allow_modifications": False})
     assert response.status_code == 400
+    print(response.status_code)
+    print(response.json())
+
     assert "not safe to execute" in response.json()['detail']
 
 
