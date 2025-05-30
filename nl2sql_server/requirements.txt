@@ -17,3 +17,4 @@ pytest-asyncio
 pydantic-settings
 faker
 tiktoken
+diskcache
