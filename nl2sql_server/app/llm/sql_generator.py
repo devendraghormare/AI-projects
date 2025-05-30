@@ -1,35 +1,47 @@
 import openai
 from loguru import logger
-from llm.prompt_examples import FEW_SHOT_SQL_EXAMPLES
 
 llm_logger = logger.bind(llm=True)
 
 async def generate_sql(question: str, schema: str, api_key: str, return_usage: bool = False):
+    # Base optimized prompt
     prompt = f"""
-You are a PostgreSQL SQL expert. Given the following database schema and natural language question,
-generate a correct and complete SQL query.
+You are a PostgreSQL SQL expert. Given a database schema and a natural language question, generate a valid SQL query.
 
-Follow these strict rules:
-- No comments, explanations, or extra formatting.
-- SQL must be valid PostgreSQL.
-- Use table and column names exactly as given.
-- Fully qualify ambiguous columns if needed.
-- WHERE, JOIN, GROUP BY, and ORDER BY clauses must be explicit if needed.
+Rules:
+- Output only the SQL query (no markdown, comments, or explanations).
+- Use correct PostgreSQL syntax.
+- Use exact table and column names as given in the schema.
+- Qualify ambiguous column names if needed.
 - Do not use aliases in WHERE or HAVING clauses.
-- Do not use window functions in invalid places (e.g., HAVING).
-- Always complete the query even if conditions are complex.
-- Output must be SQL only.
-
-Note: PostgreSQL does not support INTERVAL '1 quarter'. Use INTERVAL '3 months' instead for quarters.
-
-Here are examples of incorrect vs correct SQL (for learning):
-
-{FEW_SHOT_SQL_EXAMPLES}
+- Do not use window functions in HAVING or WHERE.
+- Use explicit JOINs, GROUP BYs, and ORDER BYs when needed.
+- PostgreSQL does not support INTERVAL '1 quarter' — use INTERVAL '3 months' instead.
 
 Schema:
 {schema}
 
 Question: "{question}"
+"""
+
+    # Optional few-shot example added only if needed (dynamic optimization)
+    if any(keyword in question.lower() for keyword in ["trend", "over time", "monthly average", "improve"]):
+        prompt += """
+        
+Example (monthly rating trend check):
+
+WITH monthly_aggregates AS (
+    SELECT product_id, DATE_TRUNC('month', created_at) AS month, AVG(rating) AS avg_rating
+    FROM reviews
+    GROUP BY product_id, month
+),
+with_lag AS (
+    SELECT *, LAG(avg_rating) OVER (PARTITION BY product_id ORDER BY month) AS prev_avg_rating
+    FROM monthly_aggregates
+)
+SELECT *
+FROM with_lag
+WHERE avg_rating > prev_avg_rating;
 """
 
     try:
@@ -46,7 +58,7 @@ Question: "{question}"
         )
 
         sql_output = response.choices[0].message.content.strip()
-        usage = response.usage  # Contains prompt_tokens, completion_tokens, total_tokens
+        usage = response.usage
 
         if return_usage:
             return {
