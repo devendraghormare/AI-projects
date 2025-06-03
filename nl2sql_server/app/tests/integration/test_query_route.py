@@ -1,28 +1,29 @@
 import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
-from main import app  # Adjust path to your FastAPI app entry
+from unittest.mock import AsyncMock
+from main import app 
 import json
 client = TestClient(app)
 
 # -------------------------------
 #  SUCCESS: Valid SELECT Query
 # -------------------------------
-@patch("app.api.v1.endpoints.query.get_db")
-@patch("app.api.v1.endpoints.query.extract_schema")
-@patch("app.api.v1.endpoints.query.generate_sql")
-@patch("app.api.v1.endpoints.query.validate_sql")
-@patch("app.api.v1.endpoints.query.execute_query")
-@patch("app.api.v1.endpoints.query.get_cache")
 @patch("app.api.v1.endpoints.query.set_cache")
+@patch("app.api.v1.endpoints.query.get_cache")
+@patch("app.api.v1.endpoints.query.execute_query")
+@patch("app.api.v1.endpoints.query.validate_sql")
+@patch("app.api.v1.endpoints.query.generate_sql", new_callable=AsyncMock)
+@patch("app.api.v1.endpoints.query.extract_schema")
+@patch("app.api.v1.endpoints.query.get_db")
 def test_generate_and_execute_query_success(
-    mock_set_cache,
-    mock_get_cache,
-    mock_execute_query,
-    mock_validate_sql,
-    mock_generate_sql,
-    mock_extract_schema,
     mock_get_db,
+    mock_extract_schema,
+    mock_generate_sql,
+    mock_validate_sql,
+    mock_execute_query,
+    mock_get_cache,
+    mock_set_cache
 ):
     mock_db = MagicMock()
     mock_get_db.return_value.__enter__.return_value = mock_db
@@ -38,8 +39,6 @@ def test_generate_and_execute_query_success(
     mock_get_cache.return_value = None
     mock_execute_query.return_value = ([("201.00",)], ["count"])
 
-
-
     response = client.post("/v1/query", json={
         "question": "How many users?",
         "allow_modifications": False
@@ -50,6 +49,7 @@ def test_generate_and_execute_query_success(
     assert data["sql_query"] == "SELECT COUNT(*) FROM users;"
     assert data["results"][0]["count"] == "201.00"
     assert "token_usage" in data
+
 
 
 # --------------------------------------
