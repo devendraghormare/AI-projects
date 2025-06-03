@@ -74,7 +74,7 @@ def test_generate_and_execute_query_invalid_sql(
 
     response = client.post("/v1/query", json={
         "question": "Drop the users table?",
-        "allow_modifications": False
+        "allow_modifications": false
     })
 
     assert response.status_code == 400
@@ -111,7 +111,7 @@ def test_generate_query_with_llm_cache_hit(
 
     response = client.post("/v1/query", json={
         "question": "Show all products",
-        "allow_modifications": False
+        "allow_modifications": false
     })
 
     assert response.status_code == 200
