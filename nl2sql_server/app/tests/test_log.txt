@@ -1,199 +1,201 @@
-2025-05-30 15:26:44 [INFO] httpx - HTTP Request: POST http://testserver/v1/query "HTTP/1.1 200 OK"
-2025-05-30 15:26:44 [INFO] httpx - HTTP Request: POST http://testserver/v1/query "HTTP/1.1 400 Bad Request"
-2025-05-30 15:26:44 [INFO] test_formatter - Testing single row: {'table': '+--------+\n| name   |\n|--------|\n| John   |\n+--------+', 'json': [{'name': 'John'}]}
-2025-05-30 15:26:44 [INFO] test_formatter - Testing multiple rows: {'table': '+--------+-------+\n| name   |   age |\n|--------+-------|\n| John   |    30 |\n| Jane   |    25 |\n+--------+-------+', 'json': [{'name': 'John', 'age': '30.00'}, {'name': 'Jane', 'age': '25.00'}]}
-2025-05-30 15:26:44 [INFO] test_formatter - Testing empty result: {'table': 'No results returned', 'json': []}
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] httpx - HTTP Request: POST http://testserver/v1/query "HTTP/1.1 200 OK"
+2025-06-03 09:45:16 [INFO] httpx - HTTP Request: POST http://testserver/v1/query "HTTP/1.1 400 Bad Request"
+2025-06-03 09:45:16 [INFO] httpx - HTTP Request: POST http://testserver/v1/query "HTTP/1.1 200 OK"
+2025-06-03 09:45:16 [INFO] httpx - HTTP Request: POST http://testserver/v1/query "HTTP/1.1 200 OK"
+2025-06-03 09:45:16 [INFO] test_formatter - Testing single row: {'table': '+--------+\n| name   |\n|--------|\n| John   |\n+--------+', 'json': [{'name': 'John'}]}
+2025-06-03 09:45:16 [INFO] test_formatter - Testing multiple rows: {'table': '+--------+-------+\n| name   |   age |\n|--------+-------|\n| John   |    30 |\n| Jane   |    25 |\n+--------+-------+', 'json': [{'name': 'John', 'age': '30.00'}, {'name': 'Jane', 'age': '25.00'}]}
+2025-06-03 09:45:16 [INFO] test_formatter - Testing empty result: {'table': 'No results returned', 'json': []}
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 
 --- Test Started ---
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: show me top 5 prdct by sales
 🟢 Optimized Question: show me top 5 product by sales?
 🟡 Expected Output: show me top 5 product by sales?
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: show me top 5 prdct by sales
 🟢 Optimized Question: show me top 5 product by sales?
 🟡 Expected Output: show me top 5 product by sales?
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 --- Test Ended ---
 
 
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 
 --- Test Started ---
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: list all usr who placed an ordr last month
 🟢 Optimized Question: list all user who placed an order last month?
 🟡 Expected Output: list all user who placed an order last month?
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: list all usr who placed an ordr last month
 🟢 Optimized Question: list all user who placed an order last month?
 🟡 Expected Output: list all user who placed an order last month?
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 --- Test Ended ---
 
 
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 
 --- Test Started ---
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: what is avg amt spent by each usr
 🟢 Optimized Question: what is average amount spent by each user?
 🟡 Expected Output: what is average amount spent by each user?
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: what is avg amt spent by each usr
 🟢 Optimized Question: what is average amount spent by each user?
 🟡 Expected Output: what is average amount spent by each user?
-2025-05-30 15:26:45 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 --- Test Ended ---
 
 
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 
 --- Test Started ---
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question:    how many products are out of stock    
 🟢 Optimized Question: how many products are out of stock?
 🟡 Expected Output: how many products are out of stock?
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question:    how many products are out of stock    
 🟢 Optimized Question: how many products are out of stock?
 🟡 Expected Output: how many products are out of stock?
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 --- Test Ended ---
 
 
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 
 --- Test Started ---
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: cnt of ordr by usr in last week
 🟢 Optimized Question: count of order by user in last week?
 🟡 Expected Output: count of order by user in last week?
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 🔵 Input Question: cnt of ordr by usr in last week
 🟢 Optimized Question: count of order by user in last week?
 🟡 Expected Output: count of order by user in last week?
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:16 [INFO] test_optimizer - 
 --- Test Ended ---
 
 
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:17 [INFO] test_optimizer - 
 
 --- Test Started ---
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:17 [INFO] test_optimizer - 
 🔵 Input Question: how many users registered today?
 🟢 Optimized Question: how many users registered today?
 🟡 Expected Output: how many users registered today?
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:17 [INFO] test_optimizer - 
 🔵 Input Question: how many users registered today?
 🟢 Optimized Question: how many users registered today?
 🟡 Expected Output: how many users registered today?
-2025-05-30 15:26:46 [INFO] test_optimizer - 
+2025-06-03 09:45:17 [INFO] test_optimizer - 
 --- Test Ended ---
 
 
-2025-05-30 15:26:46 [INFO] test_schema_extractor - 
+2025-06-03 09:45:17 [INFO] test_schema_extractor - 
 
 --- Test Started: Extract Schema Success ---
-2025-05-30 15:26:46 [INFO] test_schema_extractor - Creating dummy schema...
-2025-05-30 15:26:46 [INFO] test_schema_extractor - Dummy schema created with 'users' table.
-2025-05-30 15:26:46 [INFO] test_schema_extractor - Extracting schema...
-2025-05-30 15:26:46 [INFO] test_schema_extractor - Extracted Schema: 
+2025-06-03 09:45:17 [INFO] test_schema_extractor - Creating dummy schema...
+2025-06-03 09:45:17 [INFO] test_schema_extractor - Dummy schema created with 'users' table.
+2025-06-03 09:45:17 [INFO] test_schema_extractor - Extracting schema...
+2025-06-03 09:45:17 [INFO] test_schema_extractor - Extracted Schema: 
 Table users:
   - id (INTEGER)
   - name (TEXT)
   - email (TEXT)
 
-2025-05-30 15:26:46 [INFO] test_schema_extractor - --- Test Ended: Extract Schema Success ---
+2025-06-03 09:45:17 [INFO] test_schema_extractor - --- Test Ended: Extract Schema Success ---
 
 
-2025-05-30 15:26:46 [INFO] test_session - 
+2025-06-03 09:45:17 [INFO] test_session - 
 
 --- Test Started: DB Session Works ---
-2025-05-30 15:26:46 [INFO] test_session - DB session started. Active: True
-2025-05-30 15:26:46 [INFO] test_session - DB session is active and valid.
-2025-05-30 15:26:46 [INFO] test_session - --- Test Ended: DB Session Works ---
+2025-06-03 09:45:17 [INFO] test_session - DB session started. Session: <sqlalchemy.orm.session.Session object at 0x0000024601F96BD0>
+2025-06-03 09:45:17 [INFO] test_session - DB session executed a test query successfully.
+2025-06-03 09:45:17 [INFO] test_session - --- Test Ended: DB Session Works ---
 
 
-2025-05-30 15:26:47 [INFO] test_sql_executor - 
+2025-06-03 09:45:17 [INFO] test_sql_executor - 
 
 --- Test Started: Execute Simple Select ---
-2025-05-30 15:26:47 [INFO] test_sql_executor - Setting up dummy table for testing.
-2025-05-30 15:26:47 [INFO] test_sql_executor - Dummy table setup complete.
-2025-05-30 15:26:47 [INFO] test_sql_executor - Test Passed: Execute Simple Select. Rows and columns as expected.
-2025-05-30 15:26:47 [INFO] test_sql_executor - --- Test Ended: Execute Simple Select ---
+2025-06-03 09:45:17 [INFO] test_sql_executor - Setting up dummy table for testing.
+2025-06-03 09:45:17 [INFO] test_sql_executor - Dummy table setup complete.
+2025-06-03 09:45:17 [INFO] test_sql_executor - Test Passed: Execute Simple Select. Rows and columns as expected.
+2025-06-03 09:45:17 [INFO] test_sql_executor - --- Test Ended: Execute Simple Select ---
 
 
-2025-05-30 15:26:47 [INFO] test_sql_executor - 
+2025-06-03 09:45:17 [INFO] test_sql_executor - 
 
 --- Test Started: Execute Empty Result ---
-2025-05-30 15:26:47 [INFO] test_sql_executor - Setting up dummy table for testing.
-2025-05-30 15:26:47 [INFO] test_sql_executor - Dummy table setup complete.
-2025-05-30 15:26:47 [INFO] test_sql_executor - Test Passed: Execute Empty Result. Empty result as expected.
-2025-05-30 15:26:47 [INFO] test_sql_executor - --- Test Ended: Execute Empty Result ---
+2025-06-03 09:45:17 [INFO] test_sql_executor - Setting up dummy table for testing.
+2025-06-03 09:45:17 [INFO] test_sql_executor - Dummy table setup complete.
+2025-06-03 09:45:17 [INFO] test_sql_executor - Test Passed: Execute Empty Result. Empty result as expected.
+2025-06-03 09:45:17 [INFO] test_sql_executor - --- Test Ended: Execute Empty Result ---
 
 
-2025-05-30 15:26:47 [INFO] test_sql_executor - 
+2025-06-03 09:45:17 [INFO] test_sql_executor - 
 
 --- Test Started: Execute Invalid SQL ---
-2025-05-30 15:26:47 [INFO] test_sql_executor - Test Passed: Execute Invalid SQL. Exception raised as expected.
-2025-05-30 15:26:47 [INFO] test_sql_executor - --- Test Ended: Execute Invalid SQL ---
+2025-06-03 09:45:17 [INFO] test_sql_executor - Test Passed: Execute Invalid SQL. Exception raised as expected.
+2025-06-03 09:45:17 [INFO] test_sql_executor - --- Test Ended: Execute Invalid SQL ---
 
 
-2025-05-30 15:26:47 [INFO] test_validator - 
-
---- Test Started: Validate SQL ---
-2025-05-30 15:26:47 [INFO] test_validator - Testing query: SELECT * FROM users, Allow modifications: False
-2025-05-30 15:26:47 [INFO] test_validator - Test Passed: Query validation result is True
-2025-05-30 15:26:47 [INFO] test_validator - --- Test Ended: Validate SQL ---
-
-
-2025-05-30 15:26:47 [INFO] test_validator - 
+2025-06-03 09:45:17 [INFO] test_validator - 
 
 --- Test Started: Validate SQL ---
-2025-05-30 15:26:47 [INFO] test_validator - Testing query: DROP TABLE users, Allow modifications: False
-2025-05-30 15:26:47 [INFO] test_validator - Test Passed: Query validation result is False
-2025-05-30 15:26:47 [INFO] test_validator - --- Test Ended: Validate SQL ---
+2025-06-03 09:45:17 [INFO] test_validator - Testing query: SELECT * FROM users, Allow modifications: False
+2025-06-03 09:45:17 [INFO] test_validator - Test Passed: Query validation result is True
+2025-06-03 09:45:17 [INFO] test_validator - --- Test Ended: Validate SQL ---
 
 
-2025-05-30 15:26:47 [INFO] test_validator - 
-
---- Test Started: Validate SQL ---
-2025-05-30 15:26:47 [INFO] test_validator - Testing query: DELETE FROM users WHERE id=1, Allow modifications: False
-2025-05-30 15:26:47 [INFO] test_validator - Test Passed: Query validation result is False
-2025-05-30 15:26:47 [INFO] test_validator - --- Test Ended: Validate SQL ---
-
-
-2025-05-30 15:26:47 [INFO] test_validator - 
+2025-06-03 09:45:17 [INFO] test_validator - 
 
 --- Test Started: Validate SQL ---
-2025-05-30 15:26:47 [INFO] test_validator - Testing query: INSERT INTO users (name) VALUES ('John'), Allow modifications: False
-2025-05-30 15:26:47 [INFO] test_validator - Test Passed: Query validation result is False
-2025-05-30 15:26:47 [INFO] test_validator - --- Test Ended: Validate SQL ---
+2025-06-03 09:45:17 [INFO] test_validator - Testing query: DROP TABLE users, Allow modifications: False
+2025-06-03 09:45:17 [INFO] test_validator - Test Passed: Query validation result is False
+2025-06-03 09:45:17 [INFO] test_validator - --- Test Ended: Validate SQL ---
 
 
-2025-05-30 15:26:47 [INFO] test_validator - 
-
---- Test Started: Validate SQL ---
-2025-05-30 15:26:47 [INFO] test_validator - Testing query: UPDATE users SET name='Jane' WHERE id=1, Allow modifications: False
-2025-05-30 15:26:47 [INFO] test_validator - Test Passed: Query validation result is False
-2025-05-30 15:26:47 [INFO] test_validator - --- Test Ended: Validate SQL ---
-
-
-2025-05-30 15:26:47 [INFO] test_validator - 
+2025-06-03 09:45:17 [INFO] test_validator - 
 
 --- Test Started: Validate SQL ---
-2025-05-30 15:26:47 [INFO] test_validator - Testing query: DROP TABLE users, Allow modifications: True
-2025-05-30 15:26:47 [INFO] test_validator - Test Passed: Query validation result is True
-2025-05-30 15:26:47 [INFO] test_validator - --- Test Ended: Validate SQL ---
+2025-06-03 09:45:17 [INFO] test_validator - Testing query: DELETE FROM users WHERE id=1, Allow modifications: False
+2025-06-03 09:45:17 [INFO] test_validator - Test Passed: Query validation result is False
+2025-06-03 09:45:17 [INFO] test_validator - --- Test Ended: Validate SQL ---
 
 
-2025-05-30 15:26:47 [INFO] test_validator - 
+2025-06-03 09:45:17 [INFO] test_validator - 
 
 --- Test Started: Validate SQL ---
-2025-05-30 15:26:47 [INFO] test_validator - Testing query: SeLeCt name FROM users, Allow modifications: False
-2025-05-30 15:26:47 [INFO] test_validator - Test Passed: Query validation result is True
-2025-05-30 15:26:47 [INFO] test_validator - --- Test Ended: Validate SQL ---
+2025-06-03 09:45:17 [INFO] test_validator - Testing query: INSERT INTO users (name) VALUES ('John'), Allow modifications: False
+2025-06-03 09:45:17 [INFO] test_validator - Test Passed: Query validation result is False
+2025-06-03 09:45:17 [INFO] test_validator - --- Test Ended: Validate SQL ---
+
+
+2025-06-03 09:45:17 [INFO] test_validator - 
+
+--- Test Started: Validate SQL ---
+2025-06-03 09:45:17 [INFO] test_validator - Testing query: UPDATE users SET name='Jane' WHERE id=1, Allow modifications: False
+2025-06-03 09:45:17 [INFO] test_validator - Test Passed: Query validation result is False
+2025-06-03 09:45:17 [INFO] test_validator - --- Test Ended: Validate SQL ---
+
+
+2025-06-03 09:45:17 [INFO] test_validator - 
+
+--- Test Started: Validate SQL ---
+2025-06-03 09:45:17 [INFO] test_validator - Testing query: DROP TABLE users, Allow modifications: True
+2025-06-03 09:45:17 [INFO] test_validator - Test Passed: Query validation result is True
+2025-06-03 09:45:17 [INFO] test_validator - --- Test Ended: Validate SQL ---
+
+
+2025-06-03 09:45:17 [INFO] test_validator - 
+
+--- Test Started: Validate SQL ---
+2025-06-03 09:45:17 [INFO] test_validator - Testing query: SeLeCt name FROM users, Allow modifications: False
+2025-06-03 09:45:17 [INFO] test_validator - Test Passed: Query validation result is True
+2025-06-03 09:45:17 [INFO] test_validator - --- Test Ended: Validate SQL ---
 
 
