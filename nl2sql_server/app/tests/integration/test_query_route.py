@@ -41,7 +41,7 @@ def test_generate_and_execute_query_success(
 
     response = client.post("/v1/query", json={
         "question": "How many users?",
-        "allow_modifications": False
+        "allow_modifications": false
     })
 
     assert response.status_code == 200
