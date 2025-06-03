@@ -39,20 +39,13 @@ def test_generate_and_execute_query_success(
     mock_get_cache.return_value = None
     mock_execute_query.return_value = ([("201.00",)], ["count"])
 
-    raw_json = '''
-        {
-            "question": "How many users?",
-            "allow_modifications": false
-        }
-        '''
-
-    response = client.post(
-        "/v1/query",
-        data=raw_json,
-        headers={"Content-Type": "application/json"}
-    )
+    response = client.post("/v1/query", json={
+        "question": "How many users?",
+        "allow_modifications": False
+    })
 
     assert response.status_code == 200
+    print("Response JSON:", response.json())
     data = response.json()
     assert data["sql_query"] == "SELECT COUNT(*) FROM users;"
     assert data["results"][0]["count"] == "201.00"
@@ -82,7 +75,7 @@ def test_generate_and_execute_query_invalid_sql(
 
     response = client.post("/v1/query", json={
         "question": "Drop the users table?",
-        "allow_modifications": false
+        "allow_modifications": False
     })
 
     assert response.status_code == 400
@@ -119,7 +112,7 @@ def test_generate_query_with_llm_cache_hit(
 
     response = client.post("/v1/query", json={
         "question": "Show all products",
-        "allow_modifications": false
+        "allow_modifications": False
     })
 
     assert response.status_code == 200
