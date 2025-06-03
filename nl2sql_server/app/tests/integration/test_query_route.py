@@ -39,10 +39,18 @@ def test_generate_and_execute_query_success(
     mock_get_cache.return_value = None
     mock_execute_query.return_value = ([("201.00",)], ["count"])
 
-    response = client.post("/v1/query", json={
-        "question": "How many users?",
-        "allow_modifications": false
-    })
+    raw_json = '''
+        {
+            "question": "How many users?",
+            "allow_modifications": false
+        }
+        '''
+
+    response = client.post(
+        "/v1/query",
+        data=raw_json,
+        headers={"Content-Type": "application/json"}
+    )
 
     assert response.status_code == 200
     data = response.json()
