@@ -7,8 +7,8 @@
 
 ## Features
 
-* 🔍 Converts user questions to SQL using GPT-4o/GPT-3.5
-* 📊 Executes SQL queries on a live Postgres/SQLite DB
+* 🔍 Converts user questions to SQL using GPT-4o
+* 📊 Executes SQL queries on a live Postgres
 * 📂 Extracts schema context dynamically (with caching)
 * ⚡ Caches LLM outputs and query results for speed
 * 🔐 Validates SQL for safety (prevents risky modifications)
@@ -54,11 +54,11 @@ nl2sql-assistant/
 ## ⚙️ Tech Stack
 
 * **Backend** : FastAPI, SQLAlchemy (async)
-* **LLM** : OpenAI GPT-4o / GPT-3.5
+* **LLM** : OpenAI GPT-4o
 * **Cache** : diskcache (local), Redis (optional for prod)
-* **Database** : PostgreSQL (or SQLite for local)
+* **Database** : PostgreSQL 
 * **Container** : Docker + Docker Compose
-* **Extras** : Loguru, Prometheus (optional), Pydantic, Uvicorn
+* **Extras** : Loguru,Pydantic, Uvicorn
 
 ---
 
