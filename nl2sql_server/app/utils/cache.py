@@ -3,7 +3,7 @@ import hashlib
 import json
 from diskcache import Cache
 
-cache = Cache(".nl2sql_cache")  # folder in root of your project
+cache = Cache(".nl2sql_cache")  
 
 def make_hash_key(value: str) -> str:
     return hashlib.md5(value.encode()).hexdigest()

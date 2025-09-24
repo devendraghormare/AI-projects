@@ -8,10 +8,8 @@ from psycopg2.extras import execute_batch
 from faker import Faker
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -21,12 +19,10 @@ logging.basicConfig(
     ]
 )
 
-# Get DATABASE_URL
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise Exception("DATABASE_URL is not set in environment variables!")
 
-# Parse DATABASE_URL
 parsed_url = urlparse(DATABASE_URL)
 DB_HOST = parsed_url.hostname
 DB_PORT = parsed_url.port
@@ -34,10 +30,8 @@ DB_NAME = parsed_url.path[1:]
 DB_USER = parsed_url.username
 DB_PASSWORD = parsed_url.password
 
-# Initialize Faker
 fake = Faker()
 
-# Create DB connection
 def create_connection():
     try:
         connection = psycopg2.connect(
@@ -53,7 +47,6 @@ def create_connection():
         logging.error(f"Error connecting to database {DB_NAME}: {e}")
         return None
 
-# Fetch all IDs from a table
 def fetch_all_ids(cursor, table):
     id_columns = {
         "categories": "category_id",
@@ -68,7 +61,6 @@ def fetch_all_ids(cursor, table):
     cursor.execute(f"SELECT {id_column} FROM {table};")
     return [row[0] for row in cursor.fetchall()]
 
-# Main function
 def generate_fake_data(num_records):
     connection = create_connection()
     if not connection:
@@ -76,8 +68,6 @@ def generate_fake_data(num_records):
 
     try:
         cursor = connection.cursor()
-
-        # Insert default categories if empty
         cursor.execute("SELECT COUNT(*) FROM categories;")
         if cursor.fetchone()[0] == 0:
             logging.info("Inserting default categories...")
@@ -91,7 +81,6 @@ def generate_fake_data(num_records):
 
         category_ids = fetch_all_ids(cursor, "categories")
 
-        # Insert users
         logging.info(f"Inserting {num_records} fake users...")
         users_data = [(fake.user_name(), fake.email(), fake.password()) for _ in range(num_records)]
         execute_batch(
@@ -102,7 +91,6 @@ def generate_fake_data(num_records):
         connection.commit()
         user_ids = fetch_all_ids(cursor, "users")
 
-        # Insert products
         logging.info(f"Inserting {num_records} fake products...")
         real_product_names = [
             "Wireless Mouse", "Bluetooth Headphones", "Gaming Keyboard", "Smartphone", "4K TV",
@@ -121,7 +109,6 @@ def generate_fake_data(num_records):
         connection.commit()
         product_ids = fetch_all_ids(cursor, "products")
 
-        # Insert orders
         logging.info(f"Inserting {num_records} fake orders...")
         orders_data = [
             (random.choice(user_ids), round(random.uniform(20.0, 1000.0), 2), 'pending', fake.date_this_year())
@@ -135,7 +122,6 @@ def generate_fake_data(num_records):
         connection.commit()
         order_ids = fetch_all_ids(cursor, "orders")
 
-        # Insert order items
         logging.info(f"Inserting {num_records * 2} fake order items...")
         order_items_data = [
             (random.choice(order_ids), random.choice(product_ids), random.randint(1, 5),
@@ -147,7 +133,6 @@ def generate_fake_data(num_records):
             order_items_data
         )
 
-        # Insert reviews
         logging.info(f"Inserting {num_records} fake reviews...")
         reviews_data = [
             (random.choice(user_ids), random.choice(product_ids), random.randint(1, 5), fake.text(max_nb_chars=200))
@@ -159,7 +144,6 @@ def generate_fake_data(num_records):
             reviews_data
         )
 
-        # Insert payments
         logging.info(f"Inserting {num_records} fake payments...")
         payments_data = [
             (random.choice(order_ids), random.choice(['Credit Card', 'PayPal', 'Bank Transfer']),
@@ -172,7 +156,6 @@ def generate_fake_data(num_records):
             payments_data
         )
 
-        # Insert shipping
         logging.info(f"Inserting {num_records} fake shipping records...")
         shipping_data = [
             (random.choice(order_ids), fake.address(), random.choice(['Standard', 'Express', 'Next Day']),
@@ -185,7 +168,6 @@ def generate_fake_data(num_records):
             shipping_data
         )
 
-        # Insert inventory transactions
         logging.info(f"Inserting {num_records} fake inventory transactions...")
         inventory_data = [
             (random.choice(product_ids), random.randint(1, 10), random.choice(['sale', 'restock']),
@@ -198,7 +180,6 @@ def generate_fake_data(num_records):
             inventory_data
         )
 
-        # Insert coupons
         logging.info(f"Inserting {num_records} fake coupons...")
         coupons_data = [
             (fake.word() + str(random.randint(1000, 9999)), random.randint(5, 50),
@@ -213,7 +194,6 @@ def generate_fake_data(num_records):
         connection.commit()
         coupon_ids = fetch_all_ids(cursor, "coupons")
 
-        # Insert order coupons
         logging.info(f"Inserting {num_records} fake order_coupon entries...")
         order_coupons_data = [
             (random.choice(order_ids), random.choice(coupon_ids)) for _ in range(num_records)
@@ -234,7 +214,6 @@ def generate_fake_data(num_records):
         connection.close()
         logging.info("Database connection closed.")
 
-# Main entry
 if __name__ == "__main__":
     try:
         num_records = 200

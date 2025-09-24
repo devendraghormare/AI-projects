@@ -4,7 +4,6 @@ from contextlib import contextmanager
 from core.config import settings 
 from sqlalchemy.pool import QueuePool 
 
-# Create an engine using the DATABASE_URL from settings
 engine = create_engine(
     settings.DATABASE_URL,
     poolclass=QueuePool,
@@ -14,10 +13,8 @@ engine = create_engine(
     pool_recycle=settings.DB_POOL_RECYCLE,     # Recycle connections after 30 minutes
 )
 
-# Create a session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Use context management for proper session handling
 @contextmanager
 def get_db():
     db = SessionLocal()

@@ -10,7 +10,6 @@ class Settings(BaseSettings):
     DB_POOL_TIMEOUT: int = 30
     DB_POOL_RECYCLE: int = 1800
 
-    # Correct attribute name is 'model_config', not 'config'
     model_config: ClassVar[ConfigDict] = ConfigDict(env_file=".env")
 
 settings = Settings()

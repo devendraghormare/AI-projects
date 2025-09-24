@@ -1,7 +1,6 @@
 from sqlalchemy import inspect
 from loguru import logger
 
-# Create a logger specifically for schema extraction
 schema_logger = logger.bind(schema_extractor=True)
 
 def extract_schema(db):
@@ -9,7 +8,6 @@ def extract_schema(db):
         inspector = inspect(db.bind)
         schema_str = ""
         
-        # Get table names and extract schema
         for table_name in inspector.get_table_names():
             schema_str += f"Table {table_name}:\n"
             columns = inspector.get_columns(table_name)
@@ -19,6 +17,5 @@ def extract_schema(db):
         return schema_str
 
     except Exception as e:
-        # Log failure with the exception message
         schema_logger.error(f"Schema extraction failed: {e}")
         raise
