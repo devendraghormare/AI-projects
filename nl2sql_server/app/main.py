@@ -11,7 +11,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Include routes
 app.include_router(query.router, prefix="/v1")
 
 @app.get("/")

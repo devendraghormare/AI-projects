@@ -4,7 +4,6 @@ from loguru import logger
 llm_logger = logger.bind(llm=True)
 
 async def generate_sql(question: str, schema: str, api_key: str, return_usage: bool = False):
-    # Base optimized prompt
     prompt = f"""
 You are a PostgreSQL SQL expert. Given a database schema and a natural language question, generate a valid SQL query.
 
@@ -24,7 +23,6 @@ Schema:
 Question: "{question}"
 """
 
-    # Optional few-shot example added only if needed (dynamic optimization)
     if any(keyword in question.lower() for keyword in ["trend", "over time", "monthly average", "improve"]):
         prompt += """
         

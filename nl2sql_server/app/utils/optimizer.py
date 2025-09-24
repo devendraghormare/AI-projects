@@ -10,7 +10,6 @@ def optimize_question(question: str) -> str:
     """
     question = question.strip()
 
-    # Example optimizations (you can make this smarter later):
     replacements = {
         "prdct": "product",
         "usr": "user",
@@ -23,7 +22,6 @@ def optimize_question(question: str) -> str:
     for wrong, correct in replacements.items():
         question = question.replace(wrong, correct)
 
-    # Ensure it ends with a question mark if it’s a request
     if not question.endswith("?"):
         question += "?"
 

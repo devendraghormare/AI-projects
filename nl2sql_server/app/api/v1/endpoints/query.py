@@ -22,7 +22,7 @@ async def generate_and_execute_query(request: QueryRequest):
 
             # Extract schema
             schema_info = extract_schema(db)
-            schema_str = json.dumps(schema_info, sort_keys=True)  # normalized
+            schema_str = json.dumps(schema_info, sort_keys=True) 
             logger.info(f"Schema info extracted: {schema_info}")
 
             # Optimize question
@@ -43,7 +43,7 @@ async def generate_and_execute_query(request: QueryRequest):
                     settings.OPENAI_API_KEY,
                     return_usage=True
                 )
-                set_cache(cache_key_llm, llm_result, expire=600)  # 10 minutes
+                set_cache(cache_key_llm, llm_result, expire=600)  
 
             sql_query = llm_result["sql"].replace('```sql', '').replace('```', '').strip()
             token_usage = llm_result.get("token_usage", {})

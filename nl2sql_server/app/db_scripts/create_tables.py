@@ -3,11 +3,9 @@ import logging
 from urllib.parse import urlparse
 import psycopg2
 
-# Load environment variables
 from dotenv import load_dotenv
 load_dotenv()
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -17,25 +15,21 @@ logging.basicConfig(
     ]
 )
 
-# Get the DATABASE_URL from environment
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
     raise Exception("DATABASE_URL is not set in environment variables!")
 
-# Parse DATABASE_URL
 parsed_url = urlparse(DATABASE_URL)
 
 DB_HOST = parsed_url.hostname
 DB_PORT = parsed_url.port
-DB_NAME = parsed_url.path[1:]  # skip leading '/'
+DB_NAME = parsed_url.path[1:]  
 DB_USER = parsed_url.username
 DB_PASSWORD = parsed_url.password
 
-# Connect to PostgreSQL
 def create_connection(database=DB_NAME):
     try:
-        # Build a new URL if connecting to a different database (like "postgres")
         url = f"{parsed_url.scheme}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{database}"
         connection = psycopg2.connect(url)
         logging.info(f"Successfully connected to the database: {database}")
@@ -44,7 +38,6 @@ def create_connection(database=DB_NAME):
         logging.error(f"Error connecting to database {database}: {e}")
         return None
 
-# Create the database if it doesn't exist
 def create_database_if_not_exists():
     connection = create_connection("postgres")
     if connection is None:
@@ -52,7 +45,6 @@ def create_database_if_not_exists():
     
     try:
         cursor = connection.cursor()
-        # Check if the database exists
         cursor.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = %s;", (DB_NAME,))
         if cursor.fetchone():
             logging.info(f"Database '{DB_NAME}' already exists.")
@@ -69,7 +61,6 @@ def create_database_if_not_exists():
         if connection:
             connection.close()
 
-# SQL to create tables
 create_tables_sql = """
 -- Your full SQL schema (same as before, no changes needed)
 -- Users table

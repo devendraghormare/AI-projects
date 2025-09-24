@@ -2,10 +2,8 @@ import streamlit as st
 import requests
 import pandas as pd
 
-# Set up Streamlit page config
 st.set_page_config(page_title="SQL Query Tester", layout="wide")
 
-# Improved Dark Themed Custom CSS
 st.markdown("""
     <style>
         /* Apply a nice font everywhere */
@@ -95,58 +93,43 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar for input options
 st.sidebar.title("SQL Query Tester")
 st.sidebar.subheader("🧠 Provide a natural language question:")
 
-# Input box for the user's natural language question
 question = st.sidebar.text_input("Enter your question:")
 
-# Allow the user to modify SQL or not
 allow_modifications = st.sidebar.checkbox("Allow SQL Modifications")
 
-# Button to clear the results
 if st.sidebar.button("🧹 Clear Results"):
     st.session_state.results = None
 
-# Header of the main content area
 st.title(" SQL Query Generator & Executor")
 
-# Loading spinner while waiting for API response
 with st.spinner("Generating SQL query and fetching results..."):
-    # Button to submit the query
     if st.sidebar.button("🔎 Submit Query"):
         if question:
-            # Display the question
             st.write(f"### Question: '{question}'")
 
             try:
-                # API endpoint to generate and execute the query
-                api_url = "http://localhost:8000/v1/query"  # Replace with your FastAPI endpoint
+                api_url = "http://localhost:8000/v1/query"  
                 headers = {"Content-Type": "application/json"}
 
-                # Construct the request payload
                 payload = {
                     "question": question,
                     "allow_modifications": allow_modifications
                 }
 
-                # Send the request to FastAPI backend
                 response = requests.post(api_url, json=payload, headers=headers)
 
-                # Handle successful responses
                 if response.status_code == 200:
                     data = response.json()
-
-                    # Display the generated SQL
                     st.write(f"### 📝 Generated SQL Query:")
                     sql_query = data.get("sql_query", "")
                     if sql_query:
                         st.code(sql_query, language="sql")
                     else:
                         st.error("No SQL query generated.")
-                    
-                    # Display token usage if available
+
                     token_usage = data.get("token_usage", {})
                     if token_usage:
                         st.markdown("#### 🧾 Token Usage:")
@@ -156,8 +139,6 @@ with st.spinner("Generating SQL query and fetching results..."):
                         - Total Tokens: **{token_usage.get('total_tokens', 0)}**
                         """)
 
-
-                    # Display the results in a data frame format
                     st.write(f"### 📊 Query Results:")
 
                     if "results" in data:
